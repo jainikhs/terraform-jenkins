@@ -1,9 +1,3 @@
-# data "aws_iam_policy" "healthians_lambda_mq_policy_3" {
-#   arn = "arn:aws:iam::975050280199:policy/healthians_lambda_mq_policy_3"
-# }
-
-
-
 data "aws_iam_policy_document" "lambda_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -16,12 +10,12 @@ data "aws_iam_policy_document" "lambda_assume_role_policy" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "hl_lambda_role_haptik_whatsapp_sender"
+  name               = "hl_lambda_role_${var.lambda_function_name}"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
 }
 
 resource "aws_iam_role_policy" "lambda_policy" {
-  name   = "hl_lambda_policy_haptik_whatsapp_sender"
+  name   = "hl_lambda_policy_${var.lambda_function_name}"
   role   = aws_iam_role.lambda_role.id
   policy = jsonencode({
     "Version": "2012-10-17",
