@@ -9,7 +9,7 @@ resource "aws_lambda_function" "demo_lambda" {
     aws_sqs_queue.demo_sqs,
     aws_sqs_queue.demo_sqs_dlq
   ]
-  filename         = "/home/tech/terraformLabs/terraform_lambda_SQS/package.zip"
+  filename         = "package.zip"
   source_code_hash = filebase64sha256("package.zip")
 
   vpc_config {
